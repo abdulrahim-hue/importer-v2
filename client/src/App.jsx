@@ -13,13 +13,13 @@ function App() {
 
   return (
     <main className="container">
-      <h1>Unified Shopify → Salla CSV Transformer</h1>
+      <h1>أداة توحيد ملفات Shopify إلى Salla</h1>
       {!files && <Upload setFiles={setFiles} />}
       {files && (
         <>
           <Mapping files={files} mapping={mapping} setMapping={setMapping} />
           <button className="secondary" onClick={reset}>
-            Upload Different Files
+            رفع ملفات أخرى
           </button>
         </>
       )}

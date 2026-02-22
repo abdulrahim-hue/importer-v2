@@ -14,12 +14,12 @@ const DEFAULT_MAPPING = {
 };
 
 const PRODUCT_TRANSLATABLE_FIELDS = [
-  { key: "name", label: "Product Name" },
-  { key: "description", label: "Product Description" },
-  { key: "subtitle", label: "Subtitle" },
-  { key: "promotion_title", label: "Promotion Title" },
-  { key: "metadata_title", label: "Metadata Title" },
-  { key: "metadata_description", label: "Metadata Description" }
+  { key: "name", label: "اسم المنتج" },
+  { key: "description", label: "وصف المنتج" },
+  { key: "subtitle", label: "العنوان الفرعي" },
+  { key: "promotion_title", label: "عنوان العرض" },
+  { key: "metadata_title", label: "عنوان الميتا" },
+  { key: "metadata_description", label: "وصف الميتا" }
 ];
 
 function normalizeLocaleCode(locale) {
@@ -45,7 +45,7 @@ function Mapping({ files, mapping, setMapping }) {
         setSallaFields(schemaPayload.fields || []);
         setSchema(schemaPayload.schema || []);
       } catch {
-        setError("Failed to load Salla schema from server.");
+        setError("تعذر تحميل حقول سلة من الخادم.");
       }
     };
     loadSchema();
@@ -113,8 +113,8 @@ function Mapping({ files, mapping, setMapping }) {
     }
 
     return {
-      group: "Product Translations",
-      source: "Shopify Translation Export",
+      group: "ترجمات المنتجات",
+      source: "ملف ترجمة Shopify",
       fields
     };
   }, [translationLocales]);
@@ -156,7 +156,7 @@ function Mapping({ files, mapping, setMapping }) {
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch {
-      setError("Transformation failed. Please verify your files and mapping.");
+      setError("فشلت عملية التحويل. تأكد من الملفات ومطابقة الأعمدة.");
     } finally {
       setLoading(false);
     }
@@ -164,8 +164,8 @@ function Mapping({ files, mapping, setMapping }) {
 
   return (
     <div className="card">
-      <h2>Visual Field Mapping</h2>
-      <p>Map each Salla field to a Shopify column from your base export.</p>
+      <h2>مطابقة الحقول</h2>
+      <p>اختر لكل حقل في سلة العمود المناسب له من ملف Shopify الأساسي.</p>
 
       {error && <p className="error">{error}</p>}
 
@@ -182,13 +182,13 @@ function Mapping({ files, mapping, setMapping }) {
                   <small>{field.label}</small>
                 </span>
                 {field.auto ? (
-                  <div className="auto-field">Auto-mapped from translation file</div>
+                  <div className="auto-field">مطابق تلقائيًا من ملف الترجمة</div>
                 ) : (
                   <select
                     value={mapping[field.key] || ""}
                     onChange={(e) => handleMappingChange(field.key, e.target.value)}
                   >
-                    <option value="">Ignore this field</option>
+                    <option value="">تجاهل هذا الحقل</option>
                     {headers.map((header) => (
                       <option key={`${field.key}-${header}`} value={header}>
                         {header}
@@ -203,7 +203,7 @@ function Mapping({ files, mapping, setMapping }) {
       </div>
 
       <button onClick={handleTransform} disabled={loading}>
-        {loading ? "Generating..." : "Generate Unified File"}
+        {loading ? "جاري إنشاء الملف..." : "توليد الملف الموحد"}
       </button>
     </div>
   );

@@ -11,16 +11,16 @@ function Upload({ setFiles }) {
 
   return (
     <form className="card" onSubmit={handleSubmit}>
-      <h2>Upload Shopify CSV Files</h2>
+      <h2>رفع ملفات Shopify بصيغة CSV</h2>
       <label>
-        Shopify Full Export (required)
+        ملف التصدير الكامل من Shopify (مطلوب)
         <input type="file" name="baseFile" accept=".csv,text/csv" required />
       </label>
       <label>
-        Shopify Translation Export (optional)
+        ملف الترجمة من Shopify (اختياري)
         <input type="file" name="translationFile" accept=".csv,text/csv" />
       </label>
-      <button type="submit">Continue to Mapping</button>
+      <button type="submit">التالي: مطابقة الأعمدة</button>
     </form>
   );
 }
